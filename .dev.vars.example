@@ -1,0 +1,3 @@
+# Cloudflare's Deploy to Cloudflare flow reads this file and asks the operator for both values.
+RELAY_SETUP_TOKEN=replace-with-the-setup-token-generated-by-qbbridge
+RELAY_ALLOWED_ORIGINS=https://qbsheet.com

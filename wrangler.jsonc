@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "qbtcp-relay-backend-2",
+  "main": "src/index.ts",
+  // Custom outbound ports are not needed by this Worker, but the flag date also brings the current
+  // runtime defaults; pinning it keeps a "Deploy to Cloudflare" of this template reproducible.
+  "compatibility_date": "2026-06-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "QBTCP_RELAY",
+        "class_name": "QbtcpRelay",
+      },
+    ],
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      // SQLite-backed. A tournament's relay state is relational (rooms, sessions, results keyed by
+      // fingerprint, help items, a revision-ordered event log), and replay/ack queries need indexes
+      // a key-value backend cannot answer without reading everything.
+      "new_sqlite_classes": ["QbtcpRelay"],
+    },
+  ],
+}

@@ -1,0 +1,11 @@
+{
+  // The cross-surface drift suite, which only typechecks inside the QBSheet monorepo.
+  //
+  // Nothing but the `include` differs from `tsconfig.json`, deliberately: `test-monorepo/relay.test.ts`
+  // typechecked under exactly those options for as long as it lived in `test/`, so any option added
+  // here would be a new claim rather than a restatement. In particular there is no `"node"` in
+  // `types` — `@types/node` is not a dependency of this package and must not become one, because
+  // the relay's own install is what an operator's Cloudflare build runs.
+  "extends": "./tsconfig.json",
+  "include": ["src", "test", "test-monorepo"]
+}
